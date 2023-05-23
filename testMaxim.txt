@@ -1,0 +1,227 @@
+/* Зачади расписаны по типу, условие - пример функции - результат выполнения */
+
+/*
+1. Напишите функицю, в которую передается целое число. Функция должна вывести горку как показано в примере с тем
+числом линий, которое дыло передано в параметр функции
+
+function printHill(lines) {...}
+
+printHill(5)
+
+#
+##
+###
+####
+#####
+*/
+function printHill(lines) {
+let hill = "";
+for (let i = 1; i <= lines; i++) {
+hill += "#".repeat(i) + "\n";
+}
+console.log(hill);
+}
+
+printHill(5);
+/*
+2. В функцию передается массив, функция должна вернуть сумму всех нечетных чисел больше нуля
+
+function calculate(arr) {...}
+
+console.log(calculate([5, 0, -5, 20, 88, 17, -32]))  // 22
+*/
+function calculate(arr) {
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+if (arr[i] > 0 && arr[i] % 2 !== 0) {
+sum += arr[i];
+}
+}
+return sum;
+}
+
+console.log(calculate([5, 0, -5, 20, 88, 17, -32])); // 22
+/*
+3. В функцию передается массив целых чисел и число b. Необходимо написать фунецию, которая вернет булево значение,
+true в случае если в переданном массиве есть два числа, сумма которых равна k, иначе false.
+
+function check(arr) {...}
+
+console.log(check([10, 15, 3, 7], 17)) // true
+console.log(check([10, 15, 3, 7], 20)) // false
+
+*/
+function check(arr, k) {
+for (let i = 0; i < arr.length; i++) {
+for (let j = i + 1; j < arr.length; j++) {
+if (arr[i] + arr[j] === k) {
+return true;
+}
+}
+}
+return false;
+}
+
+console.log(check([10, 15, 3, 7], 17)); // true
+console.log(check([10, 15, 3, 7], 20)); // false
+/*
+4. В функцию передается целое число. Необходимо сделать так,
+чтобы функция возвращала сумму всех цифр в переданном числе.
+
+function sumDigits(num) {...}
+
+console.log(sumDigit(123)) // 6
+console.log(sumDigits(904)) 13
+*/
+function sumDigits(num) {
+let sum = 0;
+while (num > 0) {
+sum += num % 10;
+num = Math.floor(num / 10);
+}
+return sum;
+}
+
+console.log(sumDigits(123)); // 6
+console.log(sumDigits(904)); // 13
+/* 
+5. Написать функцию, которая принимает три числа, 'a, b, c'. Функция должна вернуть массив чисел, которые
+в промежутке между числами 'a' включительно и 'b' включительно делящиеся без остатка на 'c'
+
+function fulter(a, b) {...}
+
+console.log(filter(5, 15, 3)) // [6, 9, 12, 15]
+*/
+function filter(a, b, c) {
+const result = [];
+for (let i = a; i <= b; i++) {
+if (i % c === 0) {
+result.push(i);
+}
+}
+return result;
+}
+
+console.log(filter(5, 15, 3)); // [6, 9, 12, 15]
+/*
+6. Написать функию, в которую будет передаваться строка, функция должна вернуть булев тип, который описывает,
+является ли переданнная в функцию строка палиндромом (читается с обеих сторон одинаково)
+
+function pal(str) {...}
+
+console.log(pal('топот')) // true
+console.log(pal('Колобок')) // false
+*/
+function pal(str) {
+const reversedStr = str.toLowerCase().split('').reverse().join(''); // переворачиваем строку, приводим все к нижнему регистру
+return str.toLowerCase() === reversedStr;
+}
+
+console.log(pal('топот')); // true
+console.log(pal('Колобок')); // false
+/*
+7. В функцию пепедается массив с целыми числами. Необходимо реализовать функцию так, чтобы она возвращала значение
+большего элемента массива, которвый записан в четном индексе включая 0.
+
+function getMaxEvenElement(arr) {...}
+
+console.log(getMaxEvenElement([5, -7, -1, 12, 3, 0])) // 5
+console.log(getMaxEvenElement([4, -12, 29, 6, 31, 92, -50])) // 31
+*/
+function getMaxEvenElement(arr) {
+let max = -Infinity; 
+for (let i = 0; i < arr.length; i += 2) {
+if (arr[i] > max) { 
+max = arr[i]; 
+}
+}
+return max; 
+}
+
+console.log(getMaxEvenElement([5, -7, -1, 12, 3, 0])); // 5
+console.log(getMaxEvenElement([4, -12, 29, 6, 31, 92, -50])); // 31
+/*
+8. Необходимо создать функцию, которая будет принимать строку с буквами на английском языке. Сделать так,
+чтобы из функции возвращаласть строка, в которой гласные буквы были заменены на цифры.
+
+...
+a -> 1
+e -> 2
+i -> 3
+i -> 4
+u -> 5
+
+Также необходимо создать функцию, которая принимает зашифрованную строку и возвращает восстановленную.
+
+function encode(str) {...}
+
+function decode(str) {...}
+
+console.log(encode('hello)) // h2ll4
+console.log(decode('h2ll4')) // hello
+*/
+function encode(str) {
+  const vowels = { a: 1, e: 2, i: 3, o: 4, u: 5 };
+  return str.replace(/[aeiou]/g, (match) => vowels[match]);
+}
+function decode(str) {
+  const vowels = { 1: 'a', 2: 'e', 3: 'i', 4: 'o', 5: 'u' };
+  return str.replace(/[12345]/g, (match) => vowels[match]);
+}
+const original = 'hello';
+const encoded = encode(original); // h2ll4
+const decoded = decode(encoded); // hello
+
+console.log(encoded); // h2ll4
+console.log(decoded); // hello
+/*
+9. Напишите функцию, которая выводит на экран числа от 1 до 100. При этом вместо чисел, кратным трем, программа
+должна выводить слово, "Fizz", а вместо чисел, кратных пяти - слово "Buzz". Если число кратно и 3, и 5,
+то программа должна выводить слово "FizzBuzz"
+
+*/
+function fizzBuzz() {
+  for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log('FizzBuzz');
+    } else if (i % 3 === 0) {
+      console.log('Fizz');
+    } else if (i % 5 === 0) {
+      console.log('Buzz');
+    } else {
+      console.log(i);
+    }
+  }
+}
+
+fizzBuzz();
+/*
+10. Реализовать функцию, которая будет работать при любом количестве вызовов верно. Внутрь функции всегда передается
+число. Возвращает сумму переданных чисел.
+
+console.log(add()) // 0
+console.log(add(2)(1)) //3
+console.log(add(5)(-1)(2)()) // 6
+
+*/
+function add(x) {
+  let sum = x || 0;
+
+  function wrapper(y) {
+    if (typeof y === 'number') {
+      sum += y;
+      return wrapper;
+    }
+
+    return sum;
+  }
+
+  return wrapper;
+  
+  console.log(add()); // 0
+console.log(add(2)(1)()); // 3
+console.log(add(5)(-1)(2)()); // 6
+console.log(add(1)(2)(3)(4)(5)(6)()); // 21
+console.log(add()(3)(4)()); // 7
+}
+/*
